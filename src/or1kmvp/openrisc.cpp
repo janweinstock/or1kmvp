@@ -152,38 +152,38 @@ namespace or1kmvp {
 #define SPR(x) (32 + or1kiss::SPR_##x)
 
     static const std::vector<vcml::debugging::cpureg> openrisc_cpuregs = {
-        {  0, "gpr/0",  4, VCML_ACCESS_READ_WRITE },
-        {  1, "gpr/1",  4, VCML_ACCESS_READ_WRITE },
-        {  2, "gpr/2",  4, VCML_ACCESS_READ_WRITE },
-        {  3, "gpr/3",  4, VCML_ACCESS_READ_WRITE },
-        {  4, "gpr/4",  4, VCML_ACCESS_READ_WRITE },
-        {  5, "gpr/5",  4, VCML_ACCESS_READ_WRITE },
-        {  6, "gpr/6",  4, VCML_ACCESS_READ_WRITE },
-        {  7, "gpr/7",  4, VCML_ACCESS_READ_WRITE },
-        {  8, "gpr/8",  4, VCML_ACCESS_READ_WRITE },
-        {  9, "gpr/9",  4, VCML_ACCESS_READ_WRITE },
-        { 10, "gpr/10", 4, VCML_ACCESS_READ_WRITE },
-        { 11, "gpr/11", 4, VCML_ACCESS_READ_WRITE },
-        { 12, "gpr/12", 4, VCML_ACCESS_READ_WRITE },
-        { 13, "gpr/13", 4, VCML_ACCESS_READ_WRITE },
-        { 14, "gpr/14", 4, VCML_ACCESS_READ_WRITE },
-        { 15, "gpr/15", 4, VCML_ACCESS_READ_WRITE },
-        { 16, "gpr/16", 4, VCML_ACCESS_READ_WRITE },
-        { 17, "gpr/17", 4, VCML_ACCESS_READ_WRITE },
-        { 18, "gpr/18", 4, VCML_ACCESS_READ_WRITE },
-        { 19, "gpr/19", 4, VCML_ACCESS_READ_WRITE },
-        { 20, "gpr/20", 4, VCML_ACCESS_READ_WRITE },
-        { 21, "gpr/21", 4, VCML_ACCESS_READ_WRITE },
-        { 22, "gpr/22", 4, VCML_ACCESS_READ_WRITE },
-        { 23, "gpr/23", 4, VCML_ACCESS_READ_WRITE },
-        { 24, "gpr/24", 4, VCML_ACCESS_READ_WRITE },
-        { 25, "gpr/25", 4, VCML_ACCESS_READ_WRITE },
-        { 26, "gpr/26", 4, VCML_ACCESS_READ_WRITE },
-        { 27, "gpr/27", 4, VCML_ACCESS_READ_WRITE },
-        { 28, "gpr/28", 4, VCML_ACCESS_READ_WRITE },
-        { 29, "gpr/29", 4, VCML_ACCESS_READ_WRITE },
-        { 30, "gpr/30", 4, VCML_ACCESS_READ_WRITE },
-        { 31, "gpr/31", 4, VCML_ACCESS_READ_WRITE },
+        {  0, "gpr/r0",  4, VCML_ACCESS_READ_WRITE },
+        {  1, "gpr/r1",  4, VCML_ACCESS_READ_WRITE },
+        {  2, "gpr/r2",  4, VCML_ACCESS_READ_WRITE },
+        {  3, "gpr/r3",  4, VCML_ACCESS_READ_WRITE },
+        {  4, "gpr/r4",  4, VCML_ACCESS_READ_WRITE },
+        {  5, "gpr/r5",  4, VCML_ACCESS_READ_WRITE },
+        {  6, "gpr/r6",  4, VCML_ACCESS_READ_WRITE },
+        {  7, "gpr/r7",  4, VCML_ACCESS_READ_WRITE },
+        {  8, "gpr/r8",  4, VCML_ACCESS_READ_WRITE },
+        {  9, "gpr/r9",  4, VCML_ACCESS_READ_WRITE },
+        { 10, "gpr/r10", 4, VCML_ACCESS_READ_WRITE },
+        { 11, "gpr/r11", 4, VCML_ACCESS_READ_WRITE },
+        { 12, "gpr/r12", 4, VCML_ACCESS_READ_WRITE },
+        { 13, "gpr/r13", 4, VCML_ACCESS_READ_WRITE },
+        { 14, "gpr/r14", 4, VCML_ACCESS_READ_WRITE },
+        { 15, "gpr/r15", 4, VCML_ACCESS_READ_WRITE },
+        { 16, "gpr/r16", 4, VCML_ACCESS_READ_WRITE },
+        { 17, "gpr/r17", 4, VCML_ACCESS_READ_WRITE },
+        { 18, "gpr/r18", 4, VCML_ACCESS_READ_WRITE },
+        { 19, "gpr/r19", 4, VCML_ACCESS_READ_WRITE },
+        { 20, "gpr/r20", 4, VCML_ACCESS_READ_WRITE },
+        { 21, "gpr/r21", 4, VCML_ACCESS_READ_WRITE },
+        { 22, "gpr/r22", 4, VCML_ACCESS_READ_WRITE },
+        { 23, "gpr/r23", 4, VCML_ACCESS_READ_WRITE },
+        { 24, "gpr/r24", 4, VCML_ACCESS_READ_WRITE },
+        { 25, "gpr/r25", 4, VCML_ACCESS_READ_WRITE },
+        { 26, "gpr/r26", 4, VCML_ACCESS_READ_WRITE },
+        { 27, "gpr/r27", 4, VCML_ACCESS_READ_WRITE },
+        { 28, "gpr/r28", 4, VCML_ACCESS_READ_WRITE },
+        { 29, "gpr/r29", 4, VCML_ACCESS_READ_WRITE },
+        { 30, "gpr/r30", 4, VCML_ACCESS_READ_WRITE },
+        { 31, "gpr/r31", 4, VCML_ACCESS_READ_WRITE },
 
         { SPR(VR),       "spr/sys/vr",       4, VCML_ACCESS_READ  },
         { SPR(UPR),      "spr/sys/upr",      4, VCML_ACCESS_READ  },
@@ -207,44 +207,33 @@ namespace or1kmvp {
         { SPR(COREID),   "spr/sys/coreid",   4, VCML_ACCESS_READ  },
         { SPR(NUMCORES), "spr/sys/numcores", 4, VCML_ACCESS_READ  },
 
-        { SPR(DMMUCR),   "spr/dmmu/cr",      4, VCML_ACCESS_READ_WRITE },
+        { SPR(DMMUCR),   "spr/dmmu/dmmucr",  4, VCML_ACCESS_READ_WRITE },
         { SPR(DTLBEIR),  "spr/dmmu/tlbeir",  4, VCML_ACCESS_WRITE },
 
-        { SPR(IMMUCR),   "spr/immu/cr",      4, VCML_ACCESS_READ_WRITE },
+        { SPR(IMMUCR),   "spr/immu/immucr",  4, VCML_ACCESS_READ_WRITE },
         { SPR(ITLBEIR),  "spr/immu/tlbeir",  4, VCML_ACCESS_WRITE },
 
-        { SPR(DCBPR),    "spr/dc/bpr",       4, VCML_ACCESS_READ_WRITE },
-        { SPR(DCBFR),    "spr/dc/bfr",       4, VCML_ACCESS_READ_WRITE },
-        { SPR(DCBIR),    "spr/dc/bir",       4, VCML_ACCESS_WRITE },
-        { SPR(DCBWR),    "spr/dc/bwr",       4, VCML_ACCESS_WRITE },
-        { SPR(DCBLR),    "spr/dc/blr",       4, VCML_ACCESS_WRITE },
+        { SPR(DCBPR),    "spr/dc/dcbpr",     4, VCML_ACCESS_READ_WRITE },
+        { SPR(DCBFR),    "spr/dc/dcbfr",     4, VCML_ACCESS_READ_WRITE },
+        { SPR(DCBIR),    "spr/dc/dcbir",     4, VCML_ACCESS_WRITE },
+        { SPR(DCBWR),    "spr/dc/dcbwr",     4, VCML_ACCESS_WRITE },
+        { SPR(DCBLR),    "spr/dc/dcblr",     4, VCML_ACCESS_WRITE },
 
-        { SPR(ICBPR),    "spr/ic/bpr",       4, VCML_ACCESS_WRITE },
-        { SPR(ICBIR),    "spr/ic/bir",       4, VCML_ACCESS_WRITE },
-        { SPR(ICBLR),    "spr/ic/blr",       4, VCML_ACCESS_WRITE },
+        { SPR(ICBPR),    "spr/ic/icbpr",     4, VCML_ACCESS_WRITE },
+        { SPR(ICBIR),    "spr/ic/icbir",     4, VCML_ACCESS_WRITE },
+        { SPR(ICBLR),    "spr/ic/icblr",     4, VCML_ACCESS_WRITE },
 
         { SPR(MACLO),    "spr/mac/lo",       4, VCML_ACCESS_READ_WRITE },
         { SPR(MACHI),    "spr/mac/hi",       4, VCML_ACCESS_READ_WRITE },
 
         { SPR(PMR),      "spr/pmr/pm",       4, VCML_ACCESS_READ_WRITE },
 
-        { SPR(PICMR),    "spr/pic/mr",       4, VCML_ACCESS_READ_WRITE },
-        { SPR(PICSR),    "spr/pic/sr",       4, VCML_ACCESS_READ_WRITE },
+        { SPR(PICMR),    "spr/pic/picmr",    4, VCML_ACCESS_READ_WRITE },
+        { SPR(PICSR),    "spr/pic/picsr",    4, VCML_ACCESS_READ_WRITE },
 
-        { SPR(TTMR),     "spr/tt/mr",        4, VCML_ACCESS_READ_WRITE },
-        { SPR(TTCR),     "spr/tt/cr",        4, VCML_ACCESS_READ_WRITE },
+        { SPR(TTMR),     "spr/tt/ttmr",      4, VCML_ACCESS_READ_WRITE },
+        { SPR(TTCR),     "spr/tt/ttcr",      4, VCML_ACCESS_READ_WRITE },
     };
-
-    static const std::vector<std::string> openrisc_gdbregs = {
-        "gpr/0",  "gpr/1",  "gpr/2" , "gpr/3",  "gpr/4" , "gpr/5",  "gpr/6",
-        "gpr/7",  "gpr/8",  "gpr/9",  "gpr/10", "gpr/11", "gpr/12", "gpr/13",
-        "gpr/14", "gpr/15", "gpr/16", "gpr/17", "gpr/18", "gpr/19", "gpr/20",
-        "gpr/21", "gpr/22", "gpr/23", "gpr/24", "gpr/25", "gpr/26", "gpr/27",
-        "gpr/28", "gpr/29", "gpr/30", "gpr/31",
-
-        "spr/sys/ppc", "spr/sys/npc", "spr/sys/sr" ,
-    };
-
 #undef SPR
 
     openrisc::openrisc(const sc_core::sc_module_name& nm, unsigned int id):
@@ -523,10 +512,6 @@ namespace or1kmvp {
             m_iss->remove_watchpoint_w(addr, size);
 
         return true;
-    }
-
-    void openrisc::gdb_collect_regs(std::vector<std::string>& gdbregs) {
-        gdbregs = openrisc_gdbregs;
     }
 
 }

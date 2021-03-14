@@ -90,8 +90,6 @@ namespace or1kmvp {
                                        vcml::vcml_access acs) override;
         virtual bool remove_watchpoint(const vcml::range& mem,
                                        vcml::vcml_access acs) override;
-
-        virtual void gdb_collect_regs(std::vector<std::string>&) override;
     };
 
 }
