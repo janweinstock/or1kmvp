@@ -21,9 +21,7 @@ project(or1kmvp LANGUAGES C CXX)
 
 option(OR1KMVP_BUILD_STATIC "Build static simulator binary" OFF)
 
-set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_EXE_LINKER_FLAGS -rdynamic)
-
 set(VCML_HOME $ENV{VCML_HOME})
 set(OR1KISS_HOME $ENV{OR1KISS_HOME})
 
