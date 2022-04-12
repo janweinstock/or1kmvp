@@ -57,3 +57,4 @@ install(DIRECTORY sw/ DESTINATION sw)
 enable_testing()
 add_subdirectory(test)
 add_subdirectory(utils)
+

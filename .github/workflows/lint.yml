@@ -1,0 +1,61 @@
+name: cmake
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  BUILD_TYPE: RELEASE
+  TARGET_ARCH: linux64
+  SYSTEMC_HOME: ${{github.workspace}}/systemc
+  VCML_HOME: ${{github.workspace}}/vcml
+  OR1KISS_HOME: ${{github.workspace}}/or1kiss
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Setup dependencies
+      run: |
+          sudo apt-get update -y -qq
+          sudo apt-get install libelf-dev ninja-build clang-tidy
+
+    - name: Checkout or1kmvp
+      uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'
+
+    - name: Checkout or1kiss
+      uses: actions/checkout@v3
+      with:
+        path: or1kiss
+        ref: main
+        repository: janweinstock/or1kiss
+        submodules: 'recursive'
+
+    - name: Checkout SystemC
+      uses: actions/checkout@v3
+      with:
+        path: systemc
+        ref: 2.3.3-mwr
+        repository: machineware-gmbh/systemc
+        submodules: 'recursive'
+
+    - name: Checkout VCML
+      uses: actions/checkout@v3
+      with:
+        path: vcml
+        ref: master
+        repository: janweinstock/vcml
+        submodules: 'recursive'
+
+    - name: Configure
+      run: cmake -B BUILD -G Ninja -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DOR1KMVP_LINTER=clang-tidy .
+
+    - name: Build
+      run: cmake --build BUILD --config ${{env.BUILD_TYPE}} -j $(nproc)
+
