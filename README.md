@@ -13,6 +13,11 @@ OpenRISC applications without the need for physical OpenRISC hardware.
 Furthermore, it can also be used as a starting point for custom SystemC
 and OpenRISC based Virtual Platforms.
 
+[![Build Status](https://github.com/janweinstock/or1kmvp/actions/workflows/cmake.yml/badge.svg?event=push)](https://github.com/janweinstock/or1kmvp/actions/workflows/cmake.yml)
+[![Sanitizer Status](https://github.com/janweinstock/or1kmvp/actions/workflows/asan.yml/badge.svg?event=push)](https://github.com/janweinstock/or1kmvp/actions/workflows/asan.yml)
+[![Linter Status](https://github.com/janweinstock/or1kmvp/actions/workflows/lint.yml/badge.svg?event=push)](https://github.com/janweinstock/or1kmvp/actions/workflows/lint.yml)
+[![Code Style](https://github.com/janweinstock/or1kmvp/actions/workflows/style.yml/badge.svg?event=push)](https://github.com/janweinstock/or1kmvp/actions/workflows/style.yml)
+
 ----
 ## Build & Installation
 
