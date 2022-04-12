@@ -1,0 +1,70 @@
+#!/usr/bin/python
+
+ ##############################################################################
+ #                                                                            #
+ # Copyright 2022 Jan Henrik Weinstock                                        #
+ #                                                                            #
+ # Licensed under the Apache License, Version 2.0 (the "License");            #
+ # you may not use this file except in compliance with the License.           #
+ # You may obtain a copy of the License at                                    #
+ #                                                                            #
+ #     http://www.apache.org/licenses/LICENSE-2.0                             #
+ #                                                                            #
+ # Unless required by applicable law or agreed to in writing, software        #
+ # distributed under the License is distributed on an "AS IS" BASIS,          #
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   #
+ # See the License for the specific language governing permissions and        #
+ # limitations under the License.                                             #
+ #                                                                            #
+ ##############################################################################
+
+import sys
+import pexpect
+
+sim='$<TARGET_FILE:or1kmvp>'
+cfg='@config@'
+
+cmdline = f'{sim} -f {cfg}';
+
+cmdline += ' -c system.sdcard0.readonly=true'
+cmdline += ' -c system.sdcard1.readonly=true'
+
+cmdline += ' -c system.ocfbc.displays='
+cmdline += ' -c system.ockbd.displays='
+
+for cpu in range(@nrcpu@):
+    cmdline += f' -c system.cpu{cpu}.enable_data_dmi=$<STREQUAL:@dodmi@,dmi>'
+    cmdline += f' -c system.cpu{cpu}.enable_insn_dmi=$<STREQUAL:@dodmi@,dmi>'
+
+print(cmdline)
+
+p = pexpect.spawn(cmdline, logfile=sys.stdout, timeout=None, encoding='utf-8')
+
+# did our drivers initialize?
+p.expect('90000000.serial: ttyS0 at MMIO 0x90000000')
+p.expect('91000000.serial: ttyS1 at MMIO 0x91000000')
+p.expect('timeriomem_rng 99000000.rng: 32bits')
+p.expect('input: 94000000.keyboard')
+p.expect('rtc-ds1742 95000000.rtc: registered as rtc0')
+p.expect('SDHCI controller on f_sdh30')
+p.expect('mmc1: new SD card on SPI')
+
+# did we get a login prompt?
+p.expect('or1kmvp login:')
+p.sendline('root')
+
+# can we run commands?
+p.expect('\$')
+p.sendline('uname')
+p.expect('Linux')
+
+# did all processors boot up?
+p.expect('\$')
+p.sendline('cat /proc/cpuinfo')
+for cpu in range(@nrcpu@):
+    p.expect('OpenRISC 1000')
+
+# test ok - shut down simulation
+p.expect('\$')
+p.sendline('halt')
+p.expect(pexpect.EOF)

@@ -1,0 +1,25 @@
+/******************************************************************************
+ *                                                                            *
+ * Copyright 2022 MachineWare GmbH                                            *
+ * All Rights Reserved                                                        *
+ *                                                                            *
+ * This is unpublished proprietary work and may not be used or disclosed to   *
+ * third parties, copied or duplicated in any form, in whole or in part,      *
+ * without prior written permission of the authors.                           *
+ *                                                                            *
+ ******************************************************************************/
+
+#ifndef OR1KMVP_VERSION_H
+#define OR1KMVP_VERSION_H
+
+#define OR1KMVP_VERSION_MAJOR   @PROJECT_VERSION_MAJOR@
+#define OR1KMVP_VERSION_MINOR   @PROJECT_VERSION_MINOR@
+#define OR1KMVP_VERSION_PATCH   @PROJECT_VERSION_PATCH@
+
+#define OR1KMVP_GIT_REV         "@OR1KMVP_GIT_REV@"
+#define OR1KMVP_GIT_REV_SHORT   "@OR1KMVP_GIT_REV_SHORT@"
+
+#define OR1KMVP_VERSION         @OR1KMVP_VERSION_INT@
+#define OR1KMVP_VERSION_STRING  "@OR1KMVP_VERSION_STRING@"
+
+#endif

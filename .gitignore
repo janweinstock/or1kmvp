@@ -1,0 +1,21 @@
+# Ignore build directories
+BUILD*
+
+# Ignore build files
+*.o
+*.a
+*.so
+*.elf
+*.log
+
+# Ignore setup files
+setup.sh
+
+# Ignore eclipse project files
+.project
+.cproject
+.settings
+
+# Apple specific
+.DS_Store
+
