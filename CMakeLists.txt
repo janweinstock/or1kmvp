@@ -17,7 +17,7 @@
  ##############################################################################
 
 cmake_minimum_required(VERSION 3.11)
-project(or1kmvp VERSION 2022.04.10 LANGUAGES C CXX)
+project(or1kmvp VERSION 2022.04.13 LANGUAGES C CXX)
 
 set(OR1KMVP_LINTER "" CACHE STRING "Code linter to use")
 
