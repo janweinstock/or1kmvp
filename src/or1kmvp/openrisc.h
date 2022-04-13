@@ -61,11 +61,15 @@ public:
 
     virtual const char* version() const override;
 
+    virtual void stacktrace(std::vector<vcml::debugging::stackframe>&,
+                            size_t limit) override;
+
     virtual bool disassemble(vcml::u8*, vcml::u64&, std::string&) override;
 
     virtual vcml::u64 program_counter() override;
     virtual vcml::u64 link_register() override;
     virtual vcml::u64 stack_pointer() override;
+    virtual vcml::u64 frame_pointer() override;
 
     virtual vcml::u64 core_id() override;
     virtual void set_core_id(vcml::u64 id);

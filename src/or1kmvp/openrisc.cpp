@@ -293,6 +293,38 @@ const char* openrisc::version() const {
     return OR1KISS_VERSION_STRING;
 }
 
+void openrisc::stacktrace(std::vector<vcml::debugging::stackframe>& frames,
+                          size_t limit) {
+    vcml::u64 pc = program_counter();
+    vcml::u64 fp = frame_pointer();
+
+    const auto& symtab = vcml::debugging::target::symbols();
+    frames.clear();
+
+    for (size_t i = 0; i < limit; i++) {
+        vcml::debugging::stackframe frame;
+        frame.program_counter = pc;
+        frame.frame_pointer   = fp;
+
+        frame.sym = symtab.find_function(pc);
+        frames.push_back(frame);
+
+        vcml::u64 sp = fp;
+
+        if (fp < 8) // minimum frame size
+            break;
+
+        if (!read_vmem_dbg(fp - 4, &pc, 4))
+            break;
+
+        if (!read_vmem_dbg(fp - 8, &fp, 4))
+            break;
+
+        if (fp < sp) // stack should grow down
+            break;
+    }
+}
+
 bool openrisc::disassemble(vcml::u8* ibuf, vcml::u64& addr,
                            std::string& code) {
     if (addr & 3) // check alignment
@@ -316,6 +348,10 @@ vcml::u64 openrisc::link_register() {
 
 vcml::u64 openrisc::stack_pointer() {
     return m_iss->gpr[1];
+}
+
+vcml::u64 openrisc::frame_pointer() {
+    return m_iss->gpr[2];
 }
 
 vcml::u64 openrisc::core_id() {
