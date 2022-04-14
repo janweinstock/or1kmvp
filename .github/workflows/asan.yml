@@ -37,7 +37,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         path: or1kiss
-        ref: main
         repository: janweinstock/or1kiss
         submodules: 'recursive'
 
@@ -45,7 +44,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         path: systemc
-        ref: 2.3.3-mwr
         repository: machineware-gmbh/systemc
         submodules: 'recursive'
 
@@ -53,7 +51,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         path: vcml
-        ref: master
         repository: janweinstock/vcml
         submodules: 'recursive'
 

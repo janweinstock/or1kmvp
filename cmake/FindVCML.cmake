@@ -25,7 +25,7 @@ if(NOT TARGET vcml)
         find_package(Git REQUIRED)
         set(VCML_HOME "${CMAKE_CURRENT_BINARY_DIR}/vcml")
         set(VCML_REPO "https://github.com/janweinstock/vcml.git")
-        set(VCML_BRANCH "master")
+        set(VCML_BRANCH "main")
         message(STATUS "Fetching VCML from ${VCML_REPO}")
         execute_process(COMMAND ${GIT_EXECUTABLE} clone --depth 1 --branch ${VCML_BRANCH} ${VCML_REPO} ${VCML_HOME}
                         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
