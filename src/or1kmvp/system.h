@@ -78,9 +78,6 @@ private:
     vcml::generic::sdcard m_sdcard0;
     vcml::generic::sdcard m_sdcard1;
 
-    sc_core::sc_signal<clock_t> m_sig_clock;
-    sc_core::sc_signal<bool> m_sig_reset;
-
     sc_core::sc_signal<bool> m_gpio_spi0;
 };
 

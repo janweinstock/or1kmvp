@@ -55,8 +55,6 @@ system::system(const sc_core::sc_module_name& nm):
     m_spi2sd("spi2sd"),
     m_sdcard0("sdcard0"),
     m_sdcard1("sdcard1"),
-    m_sig_clock("sig_clock"),
-    m_sig_reset("sig_reset"),
     m_gpio_spi0("gpio_spi0") {
     m_uart0.set_big_endian();
     m_uart1.set_big_endian();
@@ -99,50 +97,48 @@ system::system(const sc_core::sc_module_name& nm):
     m_bus.bind(m_ocspi.in, ocspi);
 
     // Clock
-    m_clock.clk.bind(m_sig_clock);
-    m_bus.clk.bind(m_sig_clock);
-    m_mem.clk.bind(m_sig_clock);
-    m_uart0.clk.bind(m_sig_clock);
-    m_uart1.clk.bind(m_sig_clock);
-    m_rtc.clk.bind(m_sig_clock);
-    m_gpio.clk.bind(m_sig_clock);
-    m_hwrng.clk.bind(m_sig_clock);
-    m_sdhci.clk.bind(m_sig_clock);
-    m_ethoc.clk.bind(m_sig_clock);
-    m_ocfbc.clk.bind(m_sig_clock);
-    m_ockbd.clk.bind(m_sig_clock);
-    m_ocspi.clk.bind(m_sig_clock);
-    m_ompic.clk.bind(m_sig_clock);
-    m_spibus.clk.bind(m_sig_clock);
-    m_spi2sd.clk.bind(m_sig_clock);
-    m_sdcard0.clk.bind(m_sig_clock);
-    m_sdcard1.clk.bind(m_sig_clock);
+    m_clock.clk.bind(m_bus.clk);
+    m_clock.clk.bind(m_mem.clk);
+    m_clock.clk.bind(m_uart0.clk);
+    m_clock.clk.bind(m_uart1.clk);
+    m_clock.clk.bind(m_rtc.clk);
+    m_clock.clk.bind(m_gpio.clk);
+    m_clock.clk.bind(m_hwrng.clk);
+    m_clock.clk.bind(m_sdhci.clk);
+    m_clock.clk.bind(m_ethoc.clk);
+    m_clock.clk.bind(m_ocfbc.clk);
+    m_clock.clk.bind(m_ockbd.clk);
+    m_clock.clk.bind(m_ocspi.clk);
+    m_clock.clk.bind(m_ompic.clk);
+    m_clock.clk.bind(m_spibus.clk);
+    m_clock.clk.bind(m_spi2sd.clk);
+    m_clock.clk.bind(m_sdcard0.clk);
+    m_clock.clk.bind(m_sdcard1.clk);
 
     for (auto cpu : m_cpus)
-        cpu->clk.bind(m_sig_clock);
+        m_clock.clk.bind(cpu->clk);
 
     // Reset
-    m_reset.rst.bind(m_sig_reset);
-    m_bus.rst.bind(m_sig_reset);
-    m_mem.rst.bind(m_sig_reset);
-    m_uart0.rst.bind(m_sig_reset);
-    m_uart1.rst.bind(m_sig_reset);
-    m_rtc.rst.bind(m_sig_reset);
-    m_gpio.rst.bind(m_sig_reset);
-    m_hwrng.rst.bind(m_sig_reset);
-    m_sdhci.rst.bind(m_sig_reset);
-    m_ethoc.rst.bind(m_sig_reset);
-    m_ocfbc.rst.bind(m_sig_reset);
-    m_ockbd.rst.bind(m_sig_reset);
-    m_ocspi.rst.bind(m_sig_reset);
-    m_ompic.rst.bind(m_sig_reset);
-    m_spibus.rst.bind(m_sig_reset);
-    m_spi2sd.rst.bind(m_sig_reset);
-    m_sdcard0.rst.bind(m_sig_reset);
-    m_sdcard1.rst.bind(m_sig_reset);
+    m_reset.rst.bind(m_bus.rst);
+    m_reset.rst.bind(m_mem.rst);
+    m_reset.rst.bind(m_uart0.rst);
+    m_reset.rst.bind(m_uart1.rst);
+    m_reset.rst.bind(m_rtc.rst);
+    m_reset.rst.bind(m_gpio.rst);
+    m_reset.rst.bind(m_hwrng.rst);
+    m_reset.rst.bind(m_sdhci.rst);
+    m_reset.rst.bind(m_ethoc.rst);
+    m_reset.rst.bind(m_ocfbc.rst);
+    m_reset.rst.bind(m_ockbd.rst);
+    m_reset.rst.bind(m_ocspi.rst);
+    m_reset.rst.bind(m_ompic.rst);
+    m_reset.rst.bind(m_spibus.rst);
+    m_reset.rst.bind(m_spi2sd.rst);
+    m_reset.rst.bind(m_sdcard0.rst);
+    m_reset.rst.bind(m_sdcard1.rst);
 
     for (auto cpu : m_cpus)
-        cpu->rst.bind(m_sig_reset);
+        m_reset.rst.bind(cpu->rst);
 
     // GPIOs
     m_gpio.ports[0].bind(m_gpio_spi0);
