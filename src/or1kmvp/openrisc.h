@@ -29,7 +29,6 @@ class openrisc : public vcml::processor, private or1kiss::env
 private:
     or1kiss::or1k* m_iss;
 
-    bool cmd_gdb(const std::vector<std::string>& args, std::ostream& os);
     bool cmd_pic(const std::vector<std::string>& args, std::ostream& os);
     bool cmd_spr(const std::vector<std::string>& args, std::ostream& os);
 
@@ -49,7 +48,6 @@ public:
     vcml::property<unsigned int> irq_sdhci;
 
     vcml::property<std::string> insn_trace_file;
-    vcml::property<std::string> gdb_term;
 
     vcml::u64 insn_count() const { return m_iss->get_num_instructions(); }
     void log_timing_info() const;

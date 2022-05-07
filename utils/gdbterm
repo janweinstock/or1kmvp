@@ -21,22 +21,34 @@
 gdb="or1k-elf-gdb"
 term="xterm"
 
-case "$1" in
-  -h|--help)
-        echo "Launch source level debugger ($gdb)"
-        echo "Usage: $0 [cpu] [host] [port] [symbols]"
-        exit 0
-        ;;
-esac
-
 # check if gdb and xterm can be found
 $gdb  -v >/dev/null 2>&1 || { echo >&2 "$gdb not found, aborting."; exit 1; }
 $term -v >/dev/null 2>&1 || { echo >&2 "$term not found, aborting."; exit 1; }
 
-name="$1" # Name of the processor to connect to
-host="$2" # Simulation host
-port="$3" # Port to use for the GDB remote serial protocol
-syms="$4" # Location of the symbol file
+name="" # Name of the processor to connect to
+host="" # Simulation host
+port="" # Port to use for the GDB remote serial protocol
+syms="" # Location(s) of the symbol file(s)
 
-args="--symbols=$syms --eval-command=\"target remote $host:$port\""
+# parse command line
+while getopts "n:h:p:s:" opt; do
+    case "$opt" in
+        n) name="$OPTARG" ;;
+        h) host="$OPTARG" ;;
+        p) port="$OPTARG" ;;
+        s) syms="$syms $OPTARG" ;;
+        ?) echo "Usage $(basename $0) [-n name] [-h host] [-p port] [-s syms]"
+           exit 1
+    esac
+done
+
+test "$name" != "" || { echo >&2 "cpu name cannot be empty"; exit 1; }
+test "$port" != "" || { echo >&2 "gdb port not specified"; exit 1; }
+
+args="--nx -ex=\"set confirm off\""
+for s in $syms; do
+    args="$args -ex=\"add-symbol-file $s\""
+done
+args="$args -ex=\"set confirm on\""
+args="$args -ex=\"target remote $host:$port\""
 $term -fa 'Monospace' -fs 12 -T "$name" -e "$gdb $args" &
