@@ -236,9 +236,9 @@ openrisc::openrisc(const sc_core::sc_module_name& nm, unsigned int id):
     if (!insn_trace_file.get().empty())
         m_iss->trace(insn_trace_file);
 
-    register_command("pic", 0, this, &openrisc::cmd_pic,
+    register_command("pic", 0, &openrisc::cmd_pic,
                      "prints PIC status and pending interrupts");
-    register_command("spr", 2, this, &openrisc::cmd_spr,
+    register_command("spr", 2, &openrisc::cmd_spr,
                      "reads or writes SPR <grpid> <regid> [value]");
 
     set_big_endian();
