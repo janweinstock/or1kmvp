@@ -55,7 +55,11 @@ system::system(const sc_core::sc_module_name& nm):
     m_spi2sd("spi2sd"),
     m_sdcard0("sdcard0"),
     m_sdcard1("sdcard1"),
-    m_gpio_spi0("gpio_spi0") {
+    m_gpio_spi0("gpio_spi0"),
+    m_term0("term0"),
+    m_term1("term1"),
+    m_network("network"),
+    m_bridge("bridge") {
     m_uart0.set_big_endian();
     m_uart1.set_big_endian();
     m_rtc.set_big_endian();
@@ -174,6 +178,16 @@ system::system(const sc_core::sc_module_name& nm):
     // sdcard0 -> SDHCI, sdcard1 -> SPI
     m_sdhci.sd_out.bind(m_sdcard0.sd_in);
     m_spi2sd.sd_out.bind(m_sdcard1.sd_in);
+
+    // Serial connections
+    m_uart0.serial_tx.bind(m_term0.serial_rx);
+    m_term0.serial_tx.bind(m_uart0.serial_rx);
+    m_uart1.serial_tx.bind(m_term1.serial_rx);
+    m_term1.serial_tx.bind(m_uart1.serial_rx);
+
+    // Ethernet connections
+    m_network.connect(m_ethoc);
+    m_network.connect(m_bridge);
 }
 
 system::~system() {

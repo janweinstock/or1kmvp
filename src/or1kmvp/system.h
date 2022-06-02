@@ -79,6 +79,12 @@ private:
     vcml::generic::sdcard m_sdcard1;
 
     sc_core::sc_signal<bool> m_gpio_spi0;
+
+    vcml::serial::terminal m_term0;
+    vcml::serial::terminal m_term1;
+
+    vcml::ethernet::network m_network;
+    vcml::ethernet::bridge m_bridge;
 };
 
 } // namespace or1kmvp
