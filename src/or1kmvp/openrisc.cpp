@@ -85,7 +85,7 @@ bool openrisc::cmd_spr(const std::vector<std::string>& args,
 }
 
 void openrisc::log_timing_info() const {
-    double rt    = get_run_time();
+    double rt = get_run_time();
     vcml::u64 nc = cycle_count();
 
     log_info("clock speed   %.1f MHz", m_iss->get_clock() / 1e6);
@@ -276,7 +276,7 @@ void openrisc::stacktrace(std::vector<vcml::debugging::stackframe>& frames,
     for (size_t i = 0; i < limit; i++) {
         vcml::debugging::stackframe frame;
         frame.program_counter = pc;
-        frame.frame_pointer   = fp;
+        frame.frame_pointer = fp;
 
         frame.sym = symtab.find_function(pc);
         frames.push_back(frame);

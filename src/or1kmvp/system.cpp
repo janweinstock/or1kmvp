@@ -187,7 +187,7 @@ const char* system::version() const {
 
 int system::run() {
     double simstart = vcml::realtime();
-    int result      = vcml::system::run();
+    int result = vcml::system::run();
     double realtime = vcml::realtime() - simstart;
     double duration = sc_core::sc_time_stamp().to_seconds();
 
