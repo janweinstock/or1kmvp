@@ -78,8 +78,6 @@ private:
     vcml::generic::sdcard m_sdcard0;
     vcml::generic::sdcard m_sdcard1;
 
-    sc_core::sc_signal<bool> m_gpio_spi0;
-
     vcml::serial::terminal m_term0;
     vcml::serial::terminal m_term1;
 

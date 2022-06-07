@@ -55,7 +55,6 @@ system::system(const sc_core::sc_module_name& nm):
     m_spi2sd("spi2sd"),
     m_sdcard0("sdcard0"),
     m_sdcard1("sdcard1"),
-    m_gpio_spi0("gpio_spi0"),
     m_term0("term0"),
     m_term1("term1"),
     m_network("network"),
@@ -144,9 +143,6 @@ system::system(const sc_core::sc_module_name& nm):
     for (auto cpu : m_cpus)
         m_reset.rst.bind(cpu->rst);
 
-    // GPIOs
-    m_gpio.ports[0].bind(m_gpio_spi0);
-
     // IRQ mapping
     for (auto cpu : m_cpus) {
         vcml::u64 id = cpu->core_id();
@@ -173,7 +169,7 @@ system::system(const sc_core::sc_module_name& nm):
 
     // SPI controller -> SPI bus -> SD bus -> SD card
     m_ocspi.spi_out.bind(m_spibus.spi_in);
-    m_spibus.bind(m_spi2sd.spi_in, m_gpio_spi0, false); // CS_ACTIVE_LOW
+    m_spibus.bind(m_spi2sd.spi_in, m_gpio.gpio_out[0], false); // CS_ACTIVE_LOW
 
     // sdcard0 -> SDHCI, sdcard1 -> SPI
     m_sdhci.sd_out.bind(m_sdcard0.sd_in);
