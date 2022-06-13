@@ -66,17 +66,19 @@ private:
     vcml::generic::rtc1742 m_rtc;
     vcml::generic::gpio m_gpio;
     vcml::generic::hwrng m_hwrng;
-    vcml::generic::sdhci m_sdhci;
+
     vcml::opencores::ethoc m_ethoc;
     vcml::opencores::ocfbc m_ocfbc;
     vcml::opencores::ockbd m_ockbd;
     vcml::opencores::ocspi m_ocspi;
     vcml::opencores::ompic m_ompic;
-    vcml::generic::spibus m_spibus;
-    vcml::generic::spi2sd m_spi2sd;
 
-    vcml::generic::sdcard m_sdcard0;
-    vcml::generic::sdcard m_sdcard1;
+    vcml::sd::sdhci m_sdhci;
+    vcml::sd::sdcard m_sdcard0;
+    vcml::sd::sdcard m_sdcard1;
+
+    vcml::spi::bus m_spibus;
+    vcml::spi::spi2sd m_spi2sd;
 
     vcml::serial::terminal m_term0;
     vcml::serial::terminal m_term1;
