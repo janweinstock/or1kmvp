@@ -409,16 +409,16 @@ or1kiss::response openrisc::transact(const or1kiss::request& req) {
 
     tlm::tlm_dmi dmi;
     if (req.is_dmem() && enable_data_dmi && !get_data_ptr(req.addr)) {
-        if (data.dmi().lookup(req.addr, req.addr + req.size - 1,
-                              tlm::TLM_READ_COMMAND, dmi)) {
+        if (data.dmi_cache().lookup(req.addr, req.addr + req.size - 1,
+                                    tlm::TLM_READ_COMMAND, dmi)) {
             set_data_ptr(dmi.get_dmi_ptr(), dmi.get_start_address(),
                          dmi.get_end_address());
         }
     }
 
     if (req.is_imem() && enable_insn_dmi && !get_insn_ptr(req.addr)) {
-        if (insn.dmi().lookup(req.addr, req.addr + req.size - 1,
-                              tlm::TLM_READ_COMMAND, dmi)) {
+        if (insn.dmi_cache().lookup(req.addr, req.addr + req.size - 1,
+                                    tlm::TLM_READ_COMMAND, dmi)) {
             set_insn_ptr(dmi.get_dmi_ptr(), dmi.get_start_address(),
                          dmi.get_end_address());
         }
