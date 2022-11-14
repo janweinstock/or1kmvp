@@ -30,10 +30,11 @@ for type in $builds; do (
     prefix=$home/BUILD/$type
     build=$prefix/.BUILD
 
-    cmake -B $build -G Ninja             \
-          -DCMAKE_BUILD_TYPE=$type       \
-          -DCMAKE_INSTALL_PREFIX=$prefix \
-          -DOR1KMVP_LINTER=$linter       \
+    cmake -B $build -G Ninja                 \
+          -DCMAKE_BUILD_TYPE=$type           \
+          -DCMAKE_INSTALL_PREFIX=$prefix     \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+          -DOR1KMVP_LINTER=$linter           \
           $home
 
     cmake --build $build -j $(nproc) -- install

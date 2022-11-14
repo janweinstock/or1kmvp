@@ -93,7 +93,7 @@ void openrisc::log_timing_info() const {
     log_info("iss speed     %.1f MIPS",
              rt == 0.0 ? 0.0 : m_iss->get_num_instructions() / rt * 1e-6);
     log_info("instructions  %" PRId64, m_iss->get_num_instructions());
-    log_info("cycles        %" PRId64, nc);
+    log_info("cycles        %llu", nc);
     log_info("sleep-cycles  %" PRId64 " (%.1f%%)",
              m_iss->get_num_sleep_cycles(),
              nc == 0 ? 0.0 : m_iss->get_num_sleep_cycles() * 100.0 / nc);

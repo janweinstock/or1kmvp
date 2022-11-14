@@ -1,0 +1,4 @@
+[submodule "cmake"]
+	path = cmake
+	url = https://github.com/machineware-gmbh/cmake
+	branch = main

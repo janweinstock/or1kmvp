@@ -22,11 +22,13 @@ project(or1kmvp VERSION 2022.04.13 LANGUAGES C CXX)
 set(OR1KMVP_LINTER "" CACHE STRING "Code linter to use")
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(FindGithubRepo)
 include(GenVersionInfo)
 include(Sanitizer)
 
-find_package(OR1KISS REQUIRED)
-find_package(VCML REQUIRED)
+find_github_repo(mwr "machineware-gmbh/mwr")
+find_github_repo(vcml "machineware-gmbh/vcml")
+find_github_repo(or1kiss "janweinstock/or1kiss")
 
 set(src ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(gen ${CMAKE_CURRENT_BINARY_DIR}/gen)
@@ -42,9 +44,9 @@ add_executable(or1kmvp
 target_include_directories(or1kmvp PRIVATE ${src})
 target_include_directories(or1kmvp PRIVATE ${gen})
 
-target_link_libraries(or1kmvp ${VCML_LIBRARIES})
-target_link_libraries(or1kmvp ${OR1KISS_LIBRARIES})
-target_link_libraries(or1kmvp -rdynamic)
+target_link_libraries(or1kmvp mwr)
+target_link_libraries(or1kmvp vcml)
+target_link_libraries(or1kmvp or1kiss)
 
 set_target_properties(or1kmvp PROPERTIES CXX_CLANG_TIDY "${OR1KMVP_LINTER}")
 set_target_properties(or1kmvp PROPERTIES VERSION "${OR1KMVP_VERSION}")
@@ -57,4 +59,3 @@ install(DIRECTORY sw/ DESTINATION sw)
 enable_testing()
 add_subdirectory(test)
 add_subdirectory(utils)
-
