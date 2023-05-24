@@ -30,7 +30,7 @@ system::system(const sc_core::sc_module_name& nm):
     gpio("gpio", vcml::range(OR1KMVP_GPIO_ADDR, OR1KMVP_GPIO_END)),
     ethoc("ethoc", vcml::range(OR1KMVP_ETHOC_ADDR, OR1KMVP_ETHOC_END)),
     ocfbc("ocfbc", vcml::range(OR1KMVP_OCFBC_ADDR, OR1KMVP_OCFBC_END)),
-    ockbd("ethoc", vcml::range(OR1KMVP_OCKBD_ADDR, OR1KMVP_OCKBD_END)),
+    ockbd("ockbd", vcml::range(OR1KMVP_OCKBD_ADDR, OR1KMVP_OCKBD_END)),
     ocspi("ocspi", vcml::range(OR1KMVP_OCSPI_ADDR, OR1KMVP_OCSPI_END)),
     ompic("ompic", vcml::range(OR1KMVP_OMPIC_ADDR, OR1KMVP_OMPIC_END)),
     hwrng("hwrng", vcml::range(OR1KMVP_HWRNG_ADDR, OR1KMVP_HWRNG_END)),
@@ -40,12 +40,16 @@ system::system(const sc_core::sc_module_name& nm):
     m_reset("reset"),
     m_bus("bus"),
     m_mem("mem", mem.get().length()),
-    m_uart0("uart0"),
-    m_uart1("uart1"),
-    m_rtc("rtc", vcml::generic::rtc1742::NVMEM_8K),
     m_gpio("gpio"),
     m_hwrng("hwrng"),
+    m_rtc("rtc", vcml::timers::rtc1742::NVMEM_8K),
+    m_uart0("uart0"),
+    m_uart1("uart1"),
+    m_term0("term0"),
+    m_term1("term1"),
     m_ethoc("ethoc"),
+    m_network("network"),
+    m_bridge("bridge"),
     m_ocfbc("ocfbc"),
     m_ockbd("ockbd"),
     m_ocspi("ocspi"),
@@ -54,11 +58,7 @@ system::system(const sc_core::sc_module_name& nm):
     m_sdcard0("sdcard0"),
     m_sdcard1("sdcard1"),
     m_spibus("spibus"),
-    m_spi2sd("spi2sd"),
-    m_term0("term0"),
-    m_term1("term1"),
-    m_network("network"),
-    m_bridge("bridge") {
+    m_spi2sd("spi2sd") {
     m_uart0.set_big_endian();
     m_uart1.set_big_endian();
     m_rtc.set_big_endian();

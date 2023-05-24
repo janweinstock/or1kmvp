@@ -61,30 +61,31 @@ private:
     vcml::generic::reset m_reset;
     vcml::generic::bus m_bus;
     vcml::generic::memory m_mem;
-    vcml::generic::uart8250 m_uart0;
-    vcml::generic::uart8250 m_uart1;
-    vcml::generic::rtc1742 m_rtc;
     vcml::generic::gpio m_gpio;
     vcml::generic::hwrng m_hwrng;
 
-    vcml::opencores::ethoc m_ethoc;
-    vcml::opencores::ocfbc m_ocfbc;
-    vcml::opencores::ockbd m_ockbd;
-    vcml::opencores::ocspi m_ocspi;
-    vcml::opencores::ompic m_ompic;
+    vcml::timers::rtc1742 m_rtc;
 
-    vcml::sd::sdhci m_sdhci;
-    vcml::sd::sdcard m_sdcard0;
-    vcml::sd::sdcard m_sdcard1;
-
-    vcml::spi::bus m_spibus;
-    vcml::spi::spi2sd m_spi2sd;
-
+    vcml::serial::uart8250 m_uart0;
+    vcml::serial::uart8250 m_uart1;
     vcml::serial::terminal m_term0;
     vcml::serial::terminal m_term1;
 
+    vcml::ethernet::ethoc m_ethoc;
     vcml::ethernet::network m_network;
     vcml::ethernet::bridge m_bridge;
+
+    vcml::opencores::ocfbc m_ocfbc;
+    vcml::opencores::ockbd m_ockbd;
+    vcml::opencores::ompic m_ompic;
+
+    vcml::sd::sdhci m_sdhci;
+    vcml::sd::card m_sdcard0;
+    vcml::sd::card m_sdcard1;
+
+    vcml::spi::ocspi m_ocspi;
+    vcml::spi::bus m_spibus;
+    vcml::spi::spi2sd m_spi2sd;
 };
 
 } // namespace or1kmvp
