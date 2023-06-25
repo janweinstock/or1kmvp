@@ -43,6 +43,7 @@
 #include <signal.h>
 #include <errno.h>
 
+#include <mwr.h>
 #include <or1kiss.h>
 #include <vcml.h>
 #include <systemc>

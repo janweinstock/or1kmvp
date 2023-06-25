@@ -81,8 +81,8 @@ protected:
 
     virtual or1kiss::response transact(const or1kiss::request& r) override;
 
-    virtual bool read_reg_dbg(vcml::u64 idx, vcml::u64& val) override;
-    virtual bool write_reg_dbg(vcml::u64 idx, vcml::u64 val) override;
+    virtual bool read_reg_dbg(vcml::id_t idx, void* buf, size_t len) override;
+    virtual bool write_reg_dbg(vcml::id_t idx, const void*, size_t l) override;
 
     virtual bool page_size(vcml::u64& size) override;
     virtual bool virt_to_phys(vcml::u64 va, vcml::u64& pa) override;
