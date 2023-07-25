@@ -88,6 +88,12 @@ over this one. However, for convenience, this is the full build procedure:
    * `VCML_HOME`    (see step 3)
    * `OR1KISS_HOME` (see step 4)
 
+   Update submodules (if `or1kmvp` was not cloned recursively):
+   ```
+   git submodule init
+   git submodule update
+   ```
+
    Configuration is done with `cmake` using the regular parameters:
    ```
    mkdir -p <build-dir>
