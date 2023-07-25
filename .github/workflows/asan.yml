@@ -26,7 +26,7 @@ jobs:
     - name: Setup dependencies
       run: |
           sudo apt-get update -y -qq
-          sudo apt-get install libelf-dev ninja-build
+          sudo apt-get install libelf-dev ninja-build libvncserver-dev libslirp-dev
 
     - name: Checkout or1kmvp
       uses: actions/checkout@v3
