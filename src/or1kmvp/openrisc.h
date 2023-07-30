@@ -75,14 +75,14 @@ public:
     vcml::u64 cycle_count() const override;
 
 protected:
-    virtual void interrupt(unsigned int irq, bool set) override;
-    virtual void simulate(unsigned int) override;
-    virtual void handle_clock_update(clock_t prev, clock_t curr) override;
+    virtual void interrupt(size_t irq, bool set) override;
+    virtual void simulate(size_t cycles) override;
+    virtual void handle_clock_update(vcml::hz_t prev, vcml::hz_t cur) override;
 
     virtual or1kiss::response transact(const or1kiss::request& r) override;
 
-    virtual bool read_reg_dbg(vcml::id_t idx, void* buf, size_t len) override;
-    virtual bool write_reg_dbg(vcml::id_t idx, const void*, size_t l) override;
+    virtual bool read_reg_dbg(size_t idx, void* buf, size_t len) override;
+    virtual bool write_reg_dbg(size_t idx, const void*, size_t l) override;
 
     virtual bool page_size(vcml::u64& size) override;
     virtual bool virt_to_phys(vcml::u64 va, vcml::u64& pa) override;

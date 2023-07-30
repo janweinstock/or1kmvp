@@ -108,8 +108,8 @@ void openrisc::log_timing_info() const {
             continue;
 
         std::string s;
-        s += vcml::mkstr("irq %d status", stats.irq);
-        s += vcml::mkstr("  %d#", stats.irq_count);
+        s += vcml::mkstr("irq %zu status", stats.irq);
+        s += vcml::mkstr("  %zu#", stats.irq_count);
         s += vcml::mkstr(", avg %.1fus", stats.irq_uptime.to_seconds() /
                                              stats.irq_count * 1e6);
         s += vcml::mkstr(", max %.1fus", stats.irq_longest.to_seconds() * 1e6);
@@ -298,11 +298,12 @@ vcml::u64 openrisc::cycle_count() const {
     return m_iss->get_num_cycles();
 }
 
-void openrisc::interrupt(unsigned int irq, bool set) {
+void openrisc::interrupt(size_t irq, bool set) {
     m_iss->interrupt(irq, set);
 }
 
-void openrisc::simulate(unsigned int n) {
+void openrisc::simulate(size_t cycles) {
+    unsigned int n = cycles;
     switch (m_iss->step(n)) {
     case or1kiss::STEP_EXIT:
         sc_core::sc_stop();
@@ -331,7 +332,7 @@ void openrisc::simulate(unsigned int n) {
     }
 }
 
-void openrisc::handle_clock_update(clock_t oldclk, clock_t newclk) {
+void openrisc::handle_clock_update(vcml::hz_t oldclk, vcml::hz_t newclk) {
     processor::handle_clock_update(oldclk, newclk);
     m_iss->set_clock(newclk);
 }
@@ -389,7 +390,7 @@ or1kiss::response openrisc::transact(const or1kiss::request& req) {
     return or1kiss::RESP_SUCCESS;
 }
 
-bool openrisc::read_reg_dbg(vcml::id_t regno, void* buf, size_t len) {
+bool openrisc::read_reg_dbg(size_t regno, void* buf, size_t len) {
     if (regno < 32)
         *(vcml::u32*)buf = m_iss->gpr[regno];
     else
@@ -397,7 +398,7 @@ bool openrisc::read_reg_dbg(vcml::id_t regno, void* buf, size_t len) {
     return true;
 }
 
-bool openrisc::write_reg_dbg(vcml::id_t regno, const void* buf, size_t len) {
+bool openrisc::write_reg_dbg(size_t regno, const void* buf, size_t len) {
     if (regno < 32)
         m_iss->gpr[regno] = *(vcml::u32*)buf;
     else
