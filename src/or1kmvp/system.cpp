@@ -57,7 +57,6 @@ system::system(const sc_core::sc_module_name& nm):
     m_sdhci("sdhci"),
     m_sdcard0("sdcard0"),
     m_sdcard1("sdcard1"),
-    m_spibus("spibus"),
     m_spi2sd("spi2sd") {
     m_uart0.set_big_endian();
     m_uart1.set_big_endian();
@@ -113,7 +112,6 @@ system::system(const sc_core::sc_module_name& nm):
     m_clock.clk.bind(m_ockbd.clk);
     m_clock.clk.bind(m_ocspi.clk);
     m_clock.clk.bind(m_ompic.clk);
-    m_clock.clk.bind(m_spibus.clk);
     m_clock.clk.bind(m_spi2sd.clk);
     m_clock.clk.bind(m_sdcard0.clk);
     m_clock.clk.bind(m_sdcard1.clk);
@@ -135,7 +133,6 @@ system::system(const sc_core::sc_module_name& nm):
     m_reset.rst.bind(m_ockbd.rst);
     m_reset.rst.bind(m_ocspi.rst);
     m_reset.rst.bind(m_ompic.rst);
-    m_reset.rst.bind(m_spibus.rst);
     m_reset.rst.bind(m_spi2sd.rst);
     m_reset.rst.bind(m_sdcard0.rst);
     m_reset.rst.bind(m_sdcard1.rst);
@@ -167,9 +164,9 @@ system::system(const sc_core::sc_module_name& nm):
         cpu->irq[irq_ompic].bind(m_ompic.irq[id]);
     }
 
-    // SPI controller -> SPI bus -> SD bus -> SD card
-    m_ocspi.spi_out.bind(m_spibus.spi_in);
-    m_spibus.bind(m_spi2sd.spi_in, m_gpio.gpio_out[0], false); // CS_ACTIVE_LOW
+    // SPI controller -> SPI2SD -> SD bus -> SD card
+    m_ocspi.spi_out.bind(m_spi2sd.spi_in);
+    m_gpio.gpio_out[0].bind(m_spi2sd.cs);
 
     // sdcard0 -> SDHCI, sdcard1 -> SPI
     m_sdhci.sd_out.bind(m_sdcard0.sd_in);

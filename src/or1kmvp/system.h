@@ -84,7 +84,6 @@ private:
     vcml::sd::card m_sdcard1;
 
     vcml::spi::ocspi m_ocspi;
-    vcml::spi::bus m_spibus;
     vcml::spi::spi2sd m_spi2sd;
 };
 
