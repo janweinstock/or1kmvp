@@ -16,6 +16,9 @@ setup.sh
 .cproject
 .settings
 
+# Ignore clangd
+.clangd
+
 # Apple specific
 .DS_Store
 
