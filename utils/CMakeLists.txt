@@ -24,5 +24,3 @@ if(NOT EXISTS ${VCML_UTILS})
 endif()
 
 install(PROGRAMS ${VCML_UTILS}/tapnet DESTINATION bin RENAME or1kmvp-tapnet)
-add_executable(or1kmvp-tapctl ${VCML_UTILS}/tapctl.c)
-install(TARGETS or1kmvp-tapctl DESTINATION bin)
