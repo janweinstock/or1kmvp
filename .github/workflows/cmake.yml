@@ -16,7 +16,7 @@ env:
 jobs:
   cmake:
     name: cmake
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Setup dependencies
