@@ -61,7 +61,7 @@ private:
     vcml::generic::reset m_reset;
     vcml::generic::bus m_bus;
     vcml::generic::memory m_mem;
-    vcml::generic::gpio m_gpio;
+    vcml::gpio::mmgpio m_gpio;
     vcml::generic::hwrng m_hwrng;
 
     vcml::timers::rtc1742 m_rtc;
