@@ -310,18 +310,21 @@ void openrisc::simulate(size_t cycles) {
         wait();
         break;
 
-    case or1kiss::STEP_BREAKPOINT:
-        notify_breakpoint_hit(program_counter());
+    case or1kiss::STEP_BREAKPOINT: {
+        sc_core::sc_time t = local_time_stamp();
+        notify_breakpoint_hit(program_counter(), t);
         break;
+    }
 
     case or1kiss::STEP_WATCHPOINT: {
+        sc_core::sc_time t = local_time_stamp();
         or1kiss::watchpoint_event event;
         if (m_iss->get_watchpoint_event(event)) {
             vcml::range addr(event.addr, event.addr + event.size - 1);
             if (event.iswr)
-                notify_watchpoint_write(addr, event.wval);
+                notify_watchpoint_write(addr, &event.wval, t);
             else
-                notify_watchpoint_read(addr);
+                notify_watchpoint_read(addr, t);
         }
         break;
     }
