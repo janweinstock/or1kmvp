@@ -25,26 +25,26 @@ jobs:
           sudo apt-get install libelf-dev ninja-build libvncserver-dev libslirp-dev
 
     - name: Checkout or1kmvp
-      uses: actions/checkout@v3
+      uses: actions/checkout@v7
       with:
         submodules: 'recursive'
 
     - name: Checkout or1kiss
-      uses: actions/checkout@v3
+      uses: actions/checkout@v7
       with:
         path: or1kiss
         repository: janweinstock/or1kiss
         submodules: 'recursive'
 
     - name: Checkout SystemC
-      uses: actions/checkout@v3
+      uses: actions/checkout@v7
       with:
         path: systemc
         repository: machineware-gmbh/systemc
         submodules: 'recursive'
 
     - name: Checkout VCML
-      uses: actions/checkout@v3
+      uses: actions/checkout@v7
       with:
         path: vcml
         repository: janweinstock/vcml
