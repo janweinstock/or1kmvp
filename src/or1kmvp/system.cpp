@@ -57,7 +57,8 @@ system::system(const sc_core::sc_module_name& nm):
     m_sdhci("sdhci"),
     m_sdcard0("sdcard0"),
     m_sdcard1("sdcard1"),
-    m_spi2sd("spi2sd") {
+    m_spi2sd("spi2sd"),
+    m_console("console") {
     m_uart0.set_big_endian();
     m_uart1.set_big_endian();
     m_rtc.set_big_endian();
@@ -218,7 +219,7 @@ int system::run() {
 void system::end_of_elaboration() {
     std::stringstream ss;
     m_bus.execute("show", ss);
-    vcml::log_debug("%s", ss.str().c_str());
+    log_debug("%s", ss.str().c_str());
 }
 
 } // namespace or1kmvp

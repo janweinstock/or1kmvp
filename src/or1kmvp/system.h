@@ -85,6 +85,8 @@ private:
 
     vcml::spi::ocspi m_ocspi;
     vcml::spi::spi2sd m_spi2sd;
+
+    vcml::ui::console m_console;
 };
 
 } // namespace or1kmvp
